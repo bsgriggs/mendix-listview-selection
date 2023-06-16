@@ -1,4 +1,5 @@
 ## List View Selection
+
 A widget that simplifies making a list view with single or multi-select functionality
 
 <table>
@@ -11,11 +12,13 @@ A widget that simplifies making a list view with single or multi-select function
 </table>
 
 ## Features
-- Can select a single object or a set of objects
-- Option to have a check box, radio buttons, or highlight the row
-- Ability to run an action when the selection changes
+
+-   Can select a single object or a set of objects
+-   Option to have a check box, radio buttons, or highlight the row
+-   Ability to run an action when the selection changes
 
 ## Usage
+
 <details>
 <summary><h3>1. Domain model</h3></summary>
 <p>You need a non-persistent page helper object that has an association with the entity that is listed in the list view.</p>
@@ -55,10 +58,13 @@ A widget that simplifies making a list view with single or multi-select function
 </details>
 
 ## Demo project
+
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
 
 ## Issues, suggestions and feature requests
+
 https://github.com/bsgriggs/mendix-listview-selection/issues
 
 ## Development and contribution
+
 Benjamin Griggs
