@@ -26,6 +26,7 @@ export function ListViewSelection({
                 console.error(`List View Selection (id: ${name}) was not passed the context object.`);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataSource]);
 
     const selected: boolean = useMemo(
@@ -35,16 +36,17 @@ export function ListViewSelection({
                 : referenceSet.value !== undefined &&
                   contextObject !== undefined &&
                   referenceSet.value.find(value => value.id === contextObject.id) !== undefined,
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [reference, referenceSet, contextObject]
     );
 
     const ReadOnly: boolean = useMemo(
         () => (referenceType === "REFERENCE" ? reference.readOnly : referenceSet.readOnly),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [reference, referenceSet]
     );
 
-    const onClickContainer = () => {
+    const onClickContainer = (): void => {
         if (contextObject !== undefined) {
             if (referenceType === "REFERENCE") {
                 if (selected) {
@@ -70,7 +72,7 @@ export function ListViewSelection({
             id={name}
             tabIndex={tabIndex}
             className={classNames(className, "mendix-list-view-selection")}
-            style={{...style, cursor: ReadOnly ? "default" : "pointer"}}
+            style={{ ...style, cursor: ReadOnly ? "default" : "pointer" }}
             onClick={ReadOnly ? undefined : onClickContainer}
         >
             {selectionType === "INPUT" && (

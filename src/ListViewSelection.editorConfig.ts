@@ -1,5 +1,5 @@
 import { ListViewSelectionPreviewProps } from "../typings/ListViewSelectionProps";
-import {hidePropertiesIn, hidePropertyIn} from "@mendix/pluggable-widgets-tools";
+import { hidePropertiesIn, hidePropertyIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -102,14 +102,14 @@ export function getProperties(
     _values: ListViewSelectionPreviewProps,
     defaultProperties: Properties /* , target: Platform*/
 ): Properties {
-    if (_values.referenceType === "REFERENCE"){
-        hidePropertyIn(defaultProperties,_values, "referenceSet");
+    if (_values.referenceType === "REFERENCE") {
+        hidePropertyIn(defaultProperties, _values, "referenceSet");
     } else {
         hidePropertyIn(defaultProperties, _values, "reference");
     }
 
     if (_values.selectionType === "INPUT") {
-        hidePropertiesIn(defaultProperties,_values,["dynamicClassName", "content"]);
+        hidePropertiesIn(defaultProperties, _values, ["dynamicClassName", "content"]);
     }
 
     return defaultProperties;
