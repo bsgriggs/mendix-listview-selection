@@ -20,9 +20,9 @@ export function preview({
             {selectionType === "INPUT" && (
                 <Fragment>
                     {referenceType === "REFERENCE" ? (
-                        <input type="radio" readOnly={readOnly} checked={true}></input>
+                        <input type="radio" readOnly={readOnly} checked></input>
                     ) : (
-                        <input type="checkbox" readOnly={readOnly} checked={true}></input>
+                        <input type="checkbox" readOnly={readOnly} checked></input>
                     )}
                 </Fragment>
             )}

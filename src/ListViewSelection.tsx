@@ -82,7 +82,6 @@ export function ListViewSelection({
                     mainRef.current?.blur();
                 }
             }}
-            
             onKeyDown={event => {
                 if (event.key === "Enter" && !ReadOnly) {
                     onClickContainer();
