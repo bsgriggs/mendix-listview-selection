@@ -54,7 +54,7 @@
                     <caption>Content</caption>
                     <description></description>
                 </property>
-                <property key="dynamicClassName" type="expression" required="true">
+                <property key="dynamicClassName" type="expression" required="true" defaultValue="'selected'">
                     <caption>Dynamic class name</caption>
                     <description>The class name set on the widget's container when the current row is selected</description>
                     <returnType type="String" />

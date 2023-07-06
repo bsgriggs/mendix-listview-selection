@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ReactElement, createElement, useMemo, Fragment } from "react";
+import { ReactElement, createElement, useMemo, Fragment, useRef } from "react";
 import { ListViewSelectionContainerProps } from "../typings/ListViewSelectionProps";
 import { ValueStatus, ObjectItem } from "mendix";
 import "./ui/ListViewSelection.css";
@@ -7,7 +7,6 @@ import "./ui/ListViewSelection.css";
 export function ListViewSelection({
     class: className,
     dynamicClassName,
-    name,
     reference,
     referenceSet,
     dataSource,
@@ -17,6 +16,8 @@ export function ListViewSelection({
     style,
     tabIndex
 }: ListViewSelectionContainerProps): ReactElement {
+    const mainRef = useRef<HTMLDivElement>(null);
+
     const contextObject: ObjectItem | undefined = useMemo(() => {
         if (dataSource.status === ValueStatus.Available) {
             const items = dataSource.items;
@@ -69,22 +70,35 @@ export function ListViewSelection({
 
     return (
         <div
-            id={name}
-            tabIndex={tabIndex}
-            className={classNames(className, "mendix-list-view-selection")}
+            className={classNames(className, "mendix-listview-selection", {
+                [`${dynamicClassName.value}`]: selected && selectionType === "CONTAINER"
+            })}
             style={{ ...style, cursor: ReadOnly ? "default" : "pointer" }}
-            onClick={ReadOnly ? undefined : onClickContainer}
+            tabIndex={selectionType === "CONTAINER" ? tabIndex || 0 : undefined}
+            ref={mainRef}
+            onClick={() => {
+                if (!ReadOnly) {
+                    onClickContainer();
+                    mainRef.current?.blur();
+                }
+            }}
+            
+            onKeyDown={event => {
+                if (event.key === "Enter" && !ReadOnly) {
+                    onClickContainer();
+                }
+            }}
         >
             {selectionType === "INPUT" && (
                 <Fragment>
                     {referenceType === "REFERENCE" ? (
-                        <input type="radio" readOnly={ReadOnly} checked={selected}></input>
+                        <input type="radio" readOnly={ReadOnly} checked={selected} tabIndex={tabIndex}></input>
                     ) : (
-                        <input type="checkbox" readOnly={ReadOnly} checked={selected}></input>
+                        <input type="checkbox" readOnly={ReadOnly} checked={selected} tabIndex={tabIndex}></input>
                     )}
                 </Fragment>
             )}
-            {selectionType === "CONTAINER" && <div className={selected ? dynamicClassName.value : ""}>{content}</div>}
+            {selectionType === "CONTAINER" && content}
         </div>
     );
 }
