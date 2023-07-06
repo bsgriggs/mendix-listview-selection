@@ -16,6 +16,7 @@ A widget that simplifies making a list view with single or multi-select function
 -   Can select a single object or a set of objects
 -   Option to have a check box, radio buttons, or highlight the row
 -   Ability to run an action when the selection changes
+-   Supports keyboard navigation
 
 ## Usage
 
