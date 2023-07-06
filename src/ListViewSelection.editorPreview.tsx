@@ -5,34 +5,32 @@ import { ListViewSelectionPreviewProps } from "../typings/ListViewSelectionProps
 export function preview({
     class: className,
     content,
-    dynamicClassName,
     readOnly,
-    reference,
-    referenceSet,
     referenceType,
     selectionType,
     styleObject
 }: ListViewSelectionPreviewProps): ReactElement {
     return (
-        <div className={classNames(className, "mendix-list-view-selection")} style={styleObject}>
+        <div
+            className={classNames(className, "mendix-listview-selection", {
+                selected: selectionType === "CONTAINER"
+            })}
+            style={{ ...styleObject, cursor: readOnly ? "default" : "pointer" }}
+        >
             {selectionType === "INPUT" && (
                 <Fragment>
                     {referenceType === "REFERENCE" ? (
-                        <input type="radio" readOnly={readOnly} checked></input>
+                        <input type="radio" readOnly={readOnly} checked={true}></input>
                     ) : (
-                        <input type="checkbox" readOnly={readOnly} checked></input>
+                        <input type="checkbox" readOnly={readOnly} checked={true}></input>
                     )}
                 </Fragment>
             )}
             {selectionType === "CONTAINER" && (
-                <div style={{ border: "1px dotted red" }}>
-                    {readOnly
-                        ? "Read only mode"
-                        : `Sets ${
-                              referenceType === "REFERENCE" ? reference : referenceSet
-                          } when selected with className '${dynamicClassName}'`}
-                    {content}
-                </div>
+                // @ts-ignore
+                <content.renderer caption="Place custom content here">
+                    <div style={{ width: "100%" }} />
+                </content.renderer>
             )}
         </div>
     );
