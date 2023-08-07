@@ -23,6 +23,7 @@ export interface ListViewSelectionContainerProps {
     selectionType: SelectionTypeEnum;
     content: ReactNode;
     dynamicClassName: DynamicValue<string>;
+    ariaLabel?: DynamicValue<string>;
 }
 
 export interface ListViewSelectionPreviewProps {
@@ -42,4 +43,5 @@ export interface ListViewSelectionPreviewProps {
     selectionType: SelectionTypeEnum;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dynamicClassName: string;
+    ariaLabel: string;
 }

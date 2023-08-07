@@ -14,7 +14,8 @@ export function ListViewSelection({
     selectionType,
     content,
     style,
-    tabIndex
+    tabIndex,
+    ariaLabel
 }: ListViewSelectionContainerProps): ReactElement {
     const mainRef = useRef<HTMLDivElement>(null);
 
@@ -87,13 +88,26 @@ export function ListViewSelection({
                     onClickContainer();
                 }
             }}
+            aria-selected={selectionType === "CONTAINER" ? selected : undefined}
         >
             {selectionType === "INPUT" && (
                 <Fragment>
                     {referenceType === "REFERENCE" ? (
-                        <input type="radio" readOnly={ReadOnly} checked={selected} tabIndex={tabIndex}></input>
+                        <input
+                            type="radio"
+                            readOnly={ReadOnly}
+                            checked={selected}
+                            tabIndex={tabIndex}
+                            aria-label={ariaLabel?.value}
+                        ></input>
                     ) : (
-                        <input type="checkbox" readOnly={ReadOnly} checked={selected} tabIndex={tabIndex}></input>
+                        <input
+                            type="checkbox"
+                            readOnly={ReadOnly}
+                            checked={selected}
+                            tabIndex={tabIndex}
+                            aria-label={ariaLabel?.value}
+                        ></input>
                     )}
                 </Fragment>
             )}

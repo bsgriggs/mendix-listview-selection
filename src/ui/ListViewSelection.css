@@ -1,3 +1,7 @@
-.mendix-listview-selection:focus-visible{
+.mendix-listview-selection:focus-visible {
     outline: -webkit-focus-ring-color auto 1px;
+}
+
+.mendix-listview-selection > input {
+    background-color: #fff;
 }

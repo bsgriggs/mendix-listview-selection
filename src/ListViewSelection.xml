@@ -18,14 +18,16 @@
                         <enumerationValue key="REFERENCE_SET">Reference set</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="reference" type="association" required="true" onChange="onChange" selectableObjects="dataSource">
+                <property key="reference" type="association" required="true" onChange="onChange"
+                    selectableObjects="dataSource">
                     <caption>Reference</caption>
                     <description>The association on the page helper to set if the current row is selected</description>
                     <associationTypes>
                         <associationType name="Reference" />
                     </associationTypes>
                 </property>
-                <property key="referenceSet" type="association" required="true" onChange="onChange" selectableObjects="dataSource">
+                <property key="referenceSet" type="association" required="true" onChange="onChange"
+                    selectableObjects="dataSource">
                     <caption>Reference Set</caption>
                     <description>The association on the page helper to set if the current row is selected</description>
                     <associationTypes>
@@ -54,7 +56,8 @@
                     <caption>Content</caption>
                     <description></description>
                 </property>
-                <property key="dynamicClassName" type="expression" required="true" defaultValue="'selected'">
+                <property key="dynamicClassName" type="expression" required="true"
+                    defaultValue="'selected'">
                     <caption>Dynamic class name</caption>
                     <description>The class name set on the widget's container when the current row is selected</description>
                     <returnType type="String" />
@@ -66,6 +69,13 @@
             <systemProperty key="TabIndex"></systemProperty>
             <systemProperty key="Editability"></systemProperty>
             <systemProperty key="Visibility"></systemProperty>
+            <property key="ariaLabel" type="textTemplate" required="false">
+                <caption>Aria label</caption>
+                <description>Text a screen reader will say when the element has focus</description>
+                <translations>
+                    <translation lang="en_US">Select</translation>
+                </translations>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
