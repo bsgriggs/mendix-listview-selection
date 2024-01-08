@@ -64,18 +64,20 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <property key="ariaLabel" type="textTemplate" required="false">
+                <caption>Aria label</caption>
+                <description>Text a screen reader will say when the element has focus</description>
+                <translations>
+                    <translation lang="en_US">Select row</translation>
+                </translations>
+            </property>
+        </propertyGroup>
         <propertyGroup caption="System">
             <systemProperty key="Name"></systemProperty>
             <systemProperty key="TabIndex"></systemProperty>
             <systemProperty key="Editability"></systemProperty>
             <systemProperty key="Visibility"></systemProperty>
-            <property key="ariaLabel" type="textTemplate" required="false">
-                <caption>Aria label</caption>
-                <description>Text a screen reader will say when the element has focus</description>
-                <translations>
-                    <translation lang="en_US">Select</translation>
-                </translations>
-            </property>
         </propertyGroup>
     </properties>
 </widget>
