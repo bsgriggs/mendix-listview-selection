@@ -38,7 +38,7 @@
                     <caption>Data source</caption>
                     <description>Use a nanoflow that returns the row object</description>
                 </property>
-                <property key="onChange" type="action">
+                <property key="onChange" type="action" required="false">
                     <caption>On change</caption>
                     <description>Action ran when the reference changes</description>
                 </property>

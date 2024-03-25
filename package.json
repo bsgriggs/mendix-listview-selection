@@ -1,7 +1,7 @@
 {
     "name": "listviewselection",
     "widgetName": "ListViewSelection",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "description": "Widget that simplifies making a list view with single or multi select functionality",
     "copyright": "Benjamin Griggs 2023",
     "author": "Benjamin Griggs",
