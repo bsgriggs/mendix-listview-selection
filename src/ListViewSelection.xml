@@ -6,6 +6,7 @@
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>List View Selection</name>
     <description>Widget that simplifies making a list view with single or multi select functionality</description>
+    <helpUrl>https://github.com/bsgriggs/mendix-listview-selection/blob/master/README.md</helpUrl>
     <icon />
     <properties>
         <propertyGroup caption="General">
@@ -73,7 +74,7 @@
                 </translations>
             </property>
         </propertyGroup>
-        <propertyGroup caption="System">
+        <propertyGroup caption="Common">
             <systemProperty key="Name"></systemProperty>
             <systemProperty key="TabIndex"></systemProperty>
             <systemProperty key="Editability"></systemProperty>

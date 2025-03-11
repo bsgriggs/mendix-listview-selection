@@ -4,66 +4,52 @@ import { ListViewSelectionContainerProps } from "../typings/ListViewSelectionPro
 import { ValueStatus, ObjectItem } from "mendix";
 import "./ui/ListViewSelection.css";
 
-export function ListViewSelection({
-    class: className,
-    dynamicClassName,
-    reference,
-    referenceSet,
-    dataSource,
-    referenceType,
-    selectionType,
-    content,
-    style,
-    tabIndex,
-    ariaLabel
-}: ListViewSelectionContainerProps): ReactElement {
+export function ListViewSelection(props: ListViewSelectionContainerProps): ReactElement {
     const mainRef = useRef<HTMLDivElement>(null);
 
     const contextObject: ObjectItem | undefined = useMemo(() => {
-        if (dataSource.status === ValueStatus.Available) {
-            const items = dataSource.items;
-            if (items && items.length > 0) {
-                return dataSource.items[0];
+        if (props.dataSource.status === ValueStatus.Available) {
+            if (props.dataSource.items && props.dataSource.items.length > 0) {
+                return props.dataSource.items[0];
             } else {
-                console.error(`List View Selection (id: ${name}) was not passed the context object.`);
+                console.error(`List View Selection (id: ${props.name}) was not passed the context object.`);
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataSource]);
+    }, [props.dataSource, props.name]);
 
     const selected: boolean = useMemo(
         () =>
-            referenceType === "REFERENCE"
-                ? reference.value !== undefined && contextObject !== undefined && reference.value === contextObject
-                : referenceSet.value !== undefined &&
+            props.referenceType === "REFERENCE"
+                ? props.reference.value !== undefined &&
                   contextObject !== undefined &&
-                  referenceSet.value.find(value => value.id === contextObject.id) !== undefined,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [reference, referenceSet, contextObject]
+                  props.reference.value === contextObject
+                : props.referenceSet.value !== undefined &&
+                  contextObject !== undefined &&
+                  props.referenceSet.value.find(value => value.id === contextObject.id) !== undefined,
+        [props.reference, props.referenceSet, contextObject, props.referenceType]
     );
 
     const ReadOnly: boolean = useMemo(
-        () => (referenceType === "REFERENCE" ? reference.readOnly : referenceSet.readOnly),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [reference, referenceSet]
+        () => (props.referenceType === "REFERENCE" ? props.reference.readOnly : props.referenceSet.readOnly),
+        [props.reference, props.referenceSet, props.referenceType]
     );
 
     const onClickContainer = (): void => {
         if (contextObject !== undefined) {
-            if (referenceType === "REFERENCE") {
+            if (props.referenceType === "REFERENCE") {
                 if (selected) {
-                    reference.setValue(undefined);
+                    props.reference.setValue(undefined);
                 } else {
-                    reference.setValue(contextObject);
+                    props.reference.setValue(contextObject);
                 }
             } else {
-                const refSetValue = referenceSet.value;
+                const refSetValue = props.referenceSet.value;
                 if (selected) {
-                    referenceSet.setValue(refSetValue?.filter(value => value.id !== contextObject.id));
+                    props.referenceSet.setValue(refSetValue?.filter(value => value.id !== contextObject.id));
                 } else if (refSetValue !== undefined) {
-                    referenceSet.setValue([...refSetValue, contextObject]);
+                    props.referenceSet.setValue([...refSetValue, contextObject]);
                 } else {
-                    referenceSet.setValue([contextObject]);
+                    props.referenceSet.setValue([contextObject]);
                 }
             }
         }
@@ -71,11 +57,12 @@ export function ListViewSelection({
 
     return (
         <div
-            className={classNames(className, "mendix-listview-selection", {
-                [`${dynamicClassName.value}`]: selected && selectionType === "CONTAINER"
+            id={props.name}
+            className={classNames(props.class, "mendix-listview-selection", {
+                [`${props.dynamicClassName.value}`]: selected && props.selectionType === "CONTAINER"
             })}
-            style={{ ...style, cursor: ReadOnly ? "default" : "pointer" }}
-            tabIndex={selectionType === "CONTAINER" ? tabIndex || 0 : undefined}
+            style={{ ...props.style, cursor: ReadOnly ? "default" : "pointer" }}
+            tabIndex={props.selectionType === "CONTAINER" ? props.tabIndex || 0 : undefined}
             ref={mainRef}
             onClick={() => {
                 if (!ReadOnly) {
@@ -88,30 +75,30 @@ export function ListViewSelection({
                     onClickContainer();
                 }
             }}
-            aria-selected={selectionType === "CONTAINER" ? selected : undefined}
+            aria-selected={props.selectionType === "CONTAINER" ? selected : undefined}
         >
-            {selectionType === "INPUT" && (
+            {props.selectionType === "INPUT" && (
                 <Fragment>
-                    {referenceType === "REFERENCE" ? (
+                    {props.referenceType === "REFERENCE" ? (
                         <input
                             type="radio"
                             readOnly={ReadOnly}
                             checked={selected}
-                            tabIndex={tabIndex}
-                            aria-label={ariaLabel?.value}
+                            tabIndex={props.tabIndex}
+                            aria-label={props.ariaLabel?.value}
                         ></input>
                     ) : (
                         <input
                             type="checkbox"
                             readOnly={ReadOnly}
                             checked={selected}
-                            tabIndex={tabIndex}
-                            aria-label={ariaLabel?.value}
+                            tabIndex={props.tabIndex}
+                            aria-label={props.ariaLabel?.value}
                         ></input>
                     )}
                 </Fragment>
             )}
-            {selectionType === "CONTAINER" && content}
+            {props.selectionType === "CONTAINER" && props.content}
         </div>
     );
 }
