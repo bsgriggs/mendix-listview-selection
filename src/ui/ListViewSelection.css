@@ -2,6 +2,11 @@
     outline: -webkit-focus-ring-color auto 1px;
 }
 
-.mendix-listview-selection > input {
-    background-color: #fff;
+.mendix-listview-selection > input[type="checkbox"] {
+    background-color: #ffffff;
+}
+
+.mendix-listview-selection > input[type="radio"] {
+    background-color: #ffffff;
+    border-radius: 50%;
 }

@@ -27,7 +27,6 @@ export function preview({
                 </Fragment>
             )}
             {selectionType === "CONTAINER" && (
-                // @ts-ignore
                 <content.renderer caption="Place custom content here">
                     <div style={{ width: "100%" }} />
                 </content.renderer>

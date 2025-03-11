@@ -1,12 +1,14 @@
 /**
  * This file was generated from ListViewSelection.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix UI Content Team
+ * @author Mendix Widgets Framework Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, DynamicValue, ListValue, ReferenceValue, ReferenceSetValue } from "mendix";
+import { DynamicValue, ListValue, ReferenceValue, ReferenceSetValue } from "mendix";
 
 export type ReferenceTypeEnum = "REFERENCE" | "REFERENCE_SET";
+
+export type StorageTypeEnum = "MENDIX" | "BROWSER_STORAGE";
 
 export type SelectionTypeEnum = "INPUT" | "CONTAINER";
 
@@ -16,10 +18,10 @@ export interface ListViewSelectionContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     referenceType: ReferenceTypeEnum;
+    storageType: StorageTypeEnum;
     reference: ReferenceValue;
     referenceSet: ReferenceSetValue;
     dataSource: ListValue;
-    onChange?: ActionValue;
     selectionType: SelectionTypeEnum;
     content: ReactNode;
     dynamicClassName: DynamicValue<string>;
@@ -36,12 +38,13 @@ export interface ListViewSelectionPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     referenceType: ReferenceTypeEnum;
+    storageType: StorageTypeEnum;
     reference: string;
     referenceSet: string;
-    dataSource: {} | { type: string } | null;
+    dataSource: {} | { caption: string } | { type: string } | null;
     onChange: {} | null;
     selectionType: SelectionTypeEnum;
-    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    content: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
     dynamicClassName: string;
     ariaLabel: string;
 }

@@ -102,10 +102,14 @@ export function getProperties(
     _values: ListViewSelectionPreviewProps,
     defaultProperties: Properties /* , target: Platform*/
 ): Properties {
-    if (_values.referenceType === "REFERENCE") {
-        hidePropertyIn(defaultProperties, _values, "referenceSet");
+    if (_values.storageType === "BROWSER_STORAGE") {
+        hidePropertiesIn(defaultProperties, _values, ["reference", "referenceSet"]);
     } else {
-        hidePropertyIn(defaultProperties, _values, "reference");
+        if (_values.referenceType === "REFERENCE") {
+            hidePropertyIn(defaultProperties, _values, "referenceSet");
+        } else {
+            hidePropertyIn(defaultProperties, _values, "reference");
+        }
     }
 
     if (_values.selectionType === "INPUT") {
